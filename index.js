@@ -1,5 +1,5 @@
 const {
-    M_DIR, M_FILE,
+    M_DIR, M_FILE, logger,
     MobilettoError, MobilettoNotFoundError, readStream
 } = require('mobiletto-common')
 
