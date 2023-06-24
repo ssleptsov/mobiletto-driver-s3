@@ -1,6 +1,6 @@
 {
   "name": "mobiletto-driver-s3",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "The Amazon S3 driver for mobiletto. This package is intended to be used with mobiletto-base, which does not include any drivers",
   "main": "index.js",
   "keywords": [
@@ -29,6 +29,6 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.359.0",
     "@aws-sdk/lib-storage": "^3.359.0",
-    "mobiletto-common": "^1.0.1"
+    "mobiletto-common": "^1.0.2"
   }
 }
