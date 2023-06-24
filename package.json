@@ -1,0 +1,34 @@
+{
+  "name": "mobiletto-driver-s3",
+  "version": "1.0.2",
+  "description": "The Amazon S3 driver for mobiletto. This package is intended to be used with mobiletto-base, which does not include any drivers",
+  "main": "index.js",
+  "keywords": [
+    "storage",
+    "s3",
+    "simple",
+    "filesystem",
+    "mobiletto"
+  ],
+  "homepage": "https://github.com/cobbzilla/mobiletto",
+  "author": "Jonathan Cobb <bqppl0m2@duck.com> (https://github.com/cobbzilla)",
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/cobbzilla"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cobbzilla/mobiletto"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/preset-env": "^7.22.5"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.359.0",
+    "@aws-sdk/lib-storage": "^3.359.0",
+    "mobiletto-common": "^1.0.1"
+  }
+}
