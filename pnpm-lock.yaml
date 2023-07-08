@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.44.0)
   mobiletto-base:
-    specifier: ^2.0.25
-    version: 2.0.25
+    specifier: ^2.0.27
+    version: 2.0.27
   mobiletto-driver-local:
     specifier: ^2.0.2
     version: 2.0.2
@@ -2286,8 +2286,8 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /mobiletto-base@2.0.25:
-    resolution: {integrity: sha512-MsqbdNT4L/e0sZ1i6sZG04N7HOXtI5GN/TG/9CW6a1z09nKkdx1QTaMBq2ATsG+BJZmw+2ll97rucOlfEGPfBg==}
+  /mobiletto-base@2.0.27:
+    resolution: {integrity: sha512-GgIke0CX4GjMqcFLuUiHoOgkoNmF7Ogh1Vp7r1RuOsxT/mqnpRyWW874hIbRHotMzxNw6MbFgJbAdXSVj9LK+g==}
     dependencies:
       bullmq: 4.2.0
       ioredis: 5.3.2
