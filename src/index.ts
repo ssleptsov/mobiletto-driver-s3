@@ -31,7 +31,7 @@ import {
 
 import { Readable } from "stream";
 import { Progress, Upload } from "@aws-sdk/lib-storage";
-import {S3ClientConfig} from "@aws-sdk/client-s3/dist-types/S3Client";
+import { S3ClientConfig } from "@aws-sdk/client-s3/dist-types/S3Client";
 
 const DEFAULT_REGION = "us-east-1";
 const DEFAULT_PREFIX = "";

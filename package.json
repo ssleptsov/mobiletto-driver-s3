@@ -1,6 +1,6 @@
 {
   "name": "mobiletto-driver-s3",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "description": "The Amazon S3 driver for mobiletto. This package is intended to be used with mobiletto-base, which does not include any drivers",
   "main": "./lib/cjs/index.js",
@@ -25,9 +25,9 @@
   "scripts": {
     "test": "mocha --timeout 30000 ./test/*.spec.js",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "lint": "npx eslint src",
+    "lint": "npx eslint src test",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier src --check",
+    "prettier": "npx prettier src test --check",
     "prettier:fix": "npm run prettier -- --write"
   },
   "module": "./lib/esm/index.js",

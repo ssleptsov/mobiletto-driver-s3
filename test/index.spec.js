@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import "dotenv/config";
 
 import fs from "fs";
 import { basename, dirname } from "path";
@@ -41,12 +41,12 @@ const DRIVER_CONFIG = {
         opts: {
             bucket: process.env.MOBILETTO_TEST_S3_BUCKET,
             prefix: process.env.MOBILETTO_TEST_S3_PREFIX,
-            region: process.env.MOBILETTO_TEST_S3_REGION
+            region: process.env.MOBILETTO_TEST_S3_REGION,
         },
     },
     local: {
         key: `/tmp/_mobiletto_${rand(10)}`,
-        opts: { createIfNotExist: true }
+        opts: { createIfNotExist: true },
     },
 };
 const DRIVER_NAMES = Object.keys(DRIVER_CONFIG);
@@ -125,7 +125,7 @@ const redisTests = () => [REDIS_ENABLED, REDIS_DISABLED];
 // const redisTests = () => [REDIS_ENABLED];
 // const redisTests = () => [REDIS_DISABLED];
 
-const expectBlankVolume = false
+const expectBlankVolume = false;
 let firstTestRun = true;
 
 for (const redisSetup of redisTests()) {
