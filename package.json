@@ -1,8 +1,9 @@
 {
   "name": "mobiletto-driver-s3",
-  "version": "1.0.5",
+  "version": "2.0.0",
+  "type": "module",
   "description": "The Amazon S3 driver for mobiletto. This package is intended to be used with mobiletto-base, which does not include any drivers",
-  "main": "index.js",
+  "main": "./lib/cjs/index.js",
   "keywords": [
     "storage",
     "s3",
@@ -18,17 +19,41 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cobbzilla/mobiletto"
+    "url": "https://github.com/cobbzilla/mobiletto-driver-s3"
   },
   "license": "Apache-2.0",
+  "scripts": {
+    "test": "mocha --timeout 30000 ./test/*.spec.js",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "lint": "npx eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier src --check",
+    "prettier:fix": "npm run prettier -- --write"
+  },
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
   "devDependencies": {
-    "@babel/core": "^7.22.5",
-    "@babel/node": "^7.22.5",
-    "@babel/preset-env": "^7.22.5"
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "chai": "^4.3.7",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "mobiletto-base": "^2.0.16",
+    "mobiletto-driver-local": "^2.0.2",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "randomstring": "^1.3.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.359.0",
-    "@aws-sdk/lib-storage": "^3.359.0",
-    "mobiletto-common": "^1.0.2"
+    "@aws-sdk/client-s3": "^3.367.0",
+    "@aws-sdk/lib-storage": "^3.367.0"
   }
 }
