@@ -40,7 +40,7 @@ const DEFAULT_DELIMITER = "/";
 const DELETE_OBJECTS_MAX_KEYS = 1000;
 
 export type S3Options = MobilettoOptions & {
-    bucket: string;
+    bucket?: string;
     prefix?: string;
     delimiter?: string;
     region?: string;

@@ -1,6 +1,6 @@
 import { MobilettoError, MobilettoNotFoundError, MobilettoOptions, MobilettoVisitor, MobilettoMetadata, MobilettoWriteSource, MobilettoListOptions, MobilettoRemoveOptions } from "mobiletto-base";
 export type S3Options = MobilettoOptions & {
-    bucket: string;
+    bucket?: string;
     prefix?: string;
     delimiter?: string;
     region?: string;

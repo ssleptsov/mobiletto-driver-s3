@@ -1,6 +1,6 @@
 {
   "name": "mobiletto-driver-s3",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "type": "module",
   "description": "The Amazon S3 driver for mobiletto. This package is intended to be used with mobiletto-base, which does not include any drivers",
   "main": "./lib/cjs/index.js",
