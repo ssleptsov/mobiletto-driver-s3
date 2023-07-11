@@ -2,7 +2,6 @@ import "dotenv/config";
 
 import fs from "fs";
 import { basename, dirname } from "path";
-import * as randomstring from "randomstring";
 import * as crypto from "crypto";
 
 import { describe, it, before, beforeEach, after } from "mocha";
@@ -18,14 +17,13 @@ import {
     registerDriver,
     flushAll,
     shutdownMobiletto,
+    rand,
 } from "mobiletto-base";
 
 import { storageClient as s3Driver } from "../lib/esm/index.js";
 import { storageClient as localDriver } from "mobiletto-driver-local";
 registerDriver("s3", s3Driver);
 registerDriver("local", localDriver);
-
-const rand = (count) => randomstring.generate(count);
 
 // chunk size used by generator function, used by driver's 'write' function
 // the temp file is also TEMP_SZ_MULTIPLE of this number
@@ -360,7 +358,7 @@ for (const redisSetup of redisTests()) {
 
                     it("should write a file in a new directory using a stream", async () => {
                         // create a random temp file, write it
-                        const tempFile = `/tmp/${randomstring.generate(10)}_cool_${Date.now()}`;
+                        const tempFile = `/tmp/${rand(10)}_cool_${Date.now()}`;
                         fs.writeFileSync(tempFile, randomStreamFileData);
                         const reader = fs.createReadStream(tempFile);
                         const streamFile = fixture.name + "_stream";
