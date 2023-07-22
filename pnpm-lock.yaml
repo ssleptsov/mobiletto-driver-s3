@@ -44,8 +44,8 @@ devDependencies:
     specifier: ^2.0.31
     version: 2.0.31
   mobiletto-driver-local:
-    specifier: ^2.0.2
-    version: 2.0.2
+    specifier: ^2.0.7
+    version: 2.0.7
   mocha:
     specifier: ^10.2.0
     version: 10.2.0
@@ -2303,8 +2303,8 @@ packages:
       winston: 3.10.0
     dev: true
 
-  /mobiletto-driver-local@2.0.2:
-    resolution: {integrity: sha512-cs7cZPlzdlH3geu0mLJNsnC8usZ4rBw7Q7NKEBLYDGBY+tftupteYXXQfUGn4yQgk5UzkpcZJ3PAOUbTD2Wu+A==}
+  /mobiletto-driver-local@2.0.7:
+    resolution: {integrity: sha512-3Mw0R426CrNWLUzv0N8af0usZ5hOibZRXJE00uYTrIkX8877IAEUO+Hjm3ysZffDYm7EMkj1GqhLjXYISZd52A==}
     dev: true
 
   /mocha@10.2.0:
