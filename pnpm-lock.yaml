@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.44.0)
   mobiletto-base:
-    specifier: ^2.0.29
-    version: 2.0.29
+    specifier: ^2.0.31
+    version: 2.0.31
   mobiletto-driver-local:
     specifier: ^2.0.2
     version: 2.0.2
@@ -1506,8 +1506,8 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /bullmq@4.2.1:
-    resolution: {integrity: sha512-Ye+CbzvdJytHSbA+zhjbxanW1Vh4+CdHS4Y0lfZ4ATCkBT+6xEmCNSca4/tW+SrrgYxwpKpTNeSy4+D1Nwc+fA==}
+  /bullmq@4.6.0:
+    resolution: {integrity: sha512-RVJSC/DhruJpSoIWYS69NMZ+qTVZpWF4fZ9WKxP9QqY7WHK6Hbm+S5D7W4XN1HAExIGHTmWYZMiqKnBgxEi9XA==}
     dependencies:
       cron-parser: 4.8.1
       glob: 8.1.0
@@ -2283,13 +2283,13 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /mobiletto-base@2.0.29:
-    resolution: {integrity: sha512-RFMA3k1pmbC2/cYaLjk2FKXnE/aUX3qvn/IzqSJn7o0dePkmTcxIHQbL/3KlfktopZl3iNf44XjAbNlPyf3iag==}
+  /mobiletto-base@2.0.31:
+    resolution: {integrity: sha512-xh5MRHKTfI86DyPif45I8HxgkDrrsqU46FuqPrGFR0/xxIq7Yf0/WSwhrpkZTMU0NED1hMW22WAsiE52RGeN5A==}
     dependencies:
-      bullmq: 4.2.1
+      bullmq: 4.6.0
       ioredis: 5.3.2
       lru-cache: 10.0.0
-      mobiletto-common: 2.0.15
+      mobiletto-common: 2.0.17
       node-fetch-commonjs: 3.3.1
       node-redis-scan: 1.3.6
       shasum: 1.0.2
@@ -2297,8 +2297,8 @@ packages:
       - supports-color
     dev: true
 
-  /mobiletto-common@2.0.15:
-    resolution: {integrity: sha512-G7YG5XGz61AFRalbOwzIrDdkQetf0RRNxqL+Bq86s1IpXGkmB8ViMylaSETR6nWmjeTo1PV8YX5o+ETSHFZ8Ng==}
+  /mobiletto-common@2.0.17:
+    resolution: {integrity: sha512-vGw8/f5ucTPtuCSIvv4tgqruy0X+0sOt6fBJEUH9Kqk40vdXOjD8eejKx+thlDABehvQdfmJGNRMQKvLHf6Xjg==}
     dependencies:
       winston: 3.10.0
     dev: true
