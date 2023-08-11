@@ -11,6 +11,7 @@ import {
     MobilettoWriteSource,
     MobilettoListOptions,
     MobilettoRemoveOptions,
+    MobilettoDriverInfo,
 } from "mobiletto-base";
 
 import { dirname } from "path";
@@ -46,6 +47,11 @@ export type S3Options = MobilettoOptions & {
     region?: string;
 };
 
+export const S3Info: MobilettoDriverInfo = {
+    driver: "s3",
+    scope: "global",
+};
+
 class StorageClient {
     private client: S3Client;
     private region: string;
@@ -74,6 +80,8 @@ class StorageClient {
 
     // noinspection JSUnusedGlobalSymbols -- called by driver init
     testConfig = async () => await this._list("", false, undefined, { MaxKeys: 1 });
+
+    info = () => S3Info;
 
     stripPrefix = (name: string) => (name.startsWith(this.prefix) ? name.substring(this.prefix.length) : name);
 

@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.44.0)
   mobiletto-base:
-    specifier: ^2.0.31
-    version: 2.0.31
+    specifier: ^2.0.32
+    version: 2.0.32
   mobiletto-driver-local:
     specifier: ^2.0.7
     version: 2.0.7
@@ -1506,16 +1506,16 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /bullmq@4.6.0:
-    resolution: {integrity: sha512-RVJSC/DhruJpSoIWYS69NMZ+qTVZpWF4fZ9WKxP9QqY7WHK6Hbm+S5D7W4XN1HAExIGHTmWYZMiqKnBgxEi9XA==}
+  /bullmq@4.7.1:
+    resolution: {integrity: sha512-f6ScRQG69kFT4IOOADcEM0fJSQh+gDYQggyWTyAMVuhL4xteLupeiu0JliIx7A1dIVyWuhJXzJgA7GmFN3xr+w==}
     dependencies:
       cron-parser: 4.8.1
       glob: 8.1.0
       ioredis: 5.3.2
       lodash: 4.17.21
-      msgpackr: 1.9.5
+      msgpackr: 1.9.7
       semver: 7.5.4
-      tslib: 2.6.0
+      tslib: 2.6.1
       uuid: 9.0.0
     transitivePeerDependencies:
       - supports-color
@@ -1634,7 +1634,7 @@ packages:
     resolution: {integrity: sha512-jbokKWGcyU4gl6jAfX97E1gDpY12DJ1cLJZmoDzaAln/shZ+S3KBFBuA2Q6WeUN4gJf/8klnV1EfvhA2lK5IRQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      luxon: 3.3.0
+      luxon: 3.4.0
     dev: true
 
   /cross-spawn@7.0.3:
@@ -2233,8 +2233,8 @@ packages:
       get-func-name: 2.0.0
     dev: true
 
-  /lru-cache@10.0.0:
-    resolution: {integrity: sha512-svTf/fzsKHffP42sujkO/Rjs37BCIsQVRCeNYIm9WN8rgT7ffoUnRtZCqU+6BqcSBdv8gwJeTz8knJpgACeQMw==}
+  /lru-cache@10.0.1:
+    resolution: {integrity: sha512-IJ4uwUTi2qCccrioU6g9g/5rvvVl13bsdczUUcqbciD9iLr095yj8DQKdObriEvuNSx325N1rV1O0sJFszx75g==}
     engines: {node: 14 || >=16.14}
     dev: true
 
@@ -2245,8 +2245,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /luxon@3.3.0:
-    resolution: {integrity: sha512-An0UCfG/rSiqtAIiBPO0Y9/zAnHUZxAMiCpTd5h2smgsj7GGmcenvrvww2cqNA8/4A5ZrD1gJpHN2mIHZQF+Mg==}
+  /luxon@3.4.0:
+    resolution: {integrity: sha512-7eDo4Pt7aGhoCheGFIuq4Xa2fJm4ZpmldpGhjTYBNUYNCN6TIEP6v7chwwwt3KRp7YR+rghbfvjyo3V5y9hgBw==}
     engines: {node: '>=12'}
     dev: true
 
@@ -2283,13 +2283,13 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /mobiletto-base@2.0.31:
-    resolution: {integrity: sha512-xh5MRHKTfI86DyPif45I8HxgkDrrsqU46FuqPrGFR0/xxIq7Yf0/WSwhrpkZTMU0NED1hMW22WAsiE52RGeN5A==}
+  /mobiletto-base@2.0.32:
+    resolution: {integrity: sha512-ZX6InX/HGSHRa+UEZMPegxNeD4hsbuf3ilhlxf1j5Hs6AHSwLvXpG5MLcaVYAdFjASfVvdeOywdWAb/dqKoNZg==}
     dependencies:
-      bullmq: 4.6.0
+      bullmq: 4.7.1
       ioredis: 5.3.2
-      lru-cache: 10.0.0
-      mobiletto-common: 2.0.17
+      lru-cache: 10.0.1
+      mobiletto-common: 2.0.18
       node-fetch-commonjs: 3.3.1
       node-redis-scan: 1.3.6
       shasum: 1.0.2
@@ -2297,8 +2297,8 @@ packages:
       - supports-color
     dev: true
 
-  /mobiletto-common@2.0.17:
-    resolution: {integrity: sha512-vGw8/f5ucTPtuCSIvv4tgqruy0X+0sOt6fBJEUH9Kqk40vdXOjD8eejKx+thlDABehvQdfmJGNRMQKvLHf6Xjg==}
+  /mobiletto-common@2.0.18:
+    resolution: {integrity: sha512-cI//RuLwAGwFQBHwBrvDh+/y1oR0gsnkPIxKqzmi15y47/jvV3Qp0ItMZqsnV3MXQEYdOqboPhYkdazKY3RlXA==}
     dependencies:
       winston: 3.10.0
     dev: true
@@ -2359,8 +2359,8 @@ packages:
     dev: true
     optional: true
 
-  /msgpackr@1.9.5:
-    resolution: {integrity: sha512-/IJ3cFSN6Ci3eG2wLhbFEL6GT63yEaoN/R5My2QkV6zro+OJaVRLPlwvxY7EtHYSmDlQpk8stvOQTL2qJFkDRg==}
+  /msgpackr@1.9.7:
+    resolution: {integrity: sha512-baUNaLvKQvVhzfWTNO07njwbZK1Lxjtb0P1JL6/EhXdLTHzR57/mZqqJC39TtQKvOmkJA4pcejS4dbk7BDgLLA==}
     optionalDependencies:
       msgpackr-extract: 3.0.2
     dev: true
@@ -2707,6 +2707,11 @@ packages:
 
   /tslib@2.6.0:
     resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
+    dev: false
+
+  /tslib@2.6.1:
+    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
+    dev: true
 
   /tslint-config-prettier@1.18.0:
     resolution: {integrity: sha512-xPw9PgNPLG3iKRxmK7DWr+Ea/SzrvfHtjFt5LBl61gk2UBG/DB9kCXRjv+xyIU1rUtnayLeMUVJBcMX8Z17nDg==}

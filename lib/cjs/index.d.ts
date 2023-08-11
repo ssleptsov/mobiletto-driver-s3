@@ -1,10 +1,11 @@
-import { MobilettoError, MobilettoNotFoundError, MobilettoOptions, MobilettoVisitor, MobilettoMetadata, MobilettoWriteSource, MobilettoListOptions, MobilettoRemoveOptions } from "mobiletto-base";
+import { MobilettoError, MobilettoNotFoundError, MobilettoOptions, MobilettoVisitor, MobilettoMetadata, MobilettoWriteSource, MobilettoListOptions, MobilettoRemoveOptions, MobilettoDriverInfo } from "mobiletto-base";
 export type S3Options = MobilettoOptions & {
     bucket?: string;
     prefix?: string;
     delimiter?: string;
     region?: string;
 };
+export declare const S3Info: MobilettoDriverInfo;
 declare class StorageClient {
     private client;
     private region;
@@ -14,6 +15,7 @@ declare class StorageClient {
     private normalizeRegex;
     constructor(key: string, secret: string, opts: S3Options);
     testConfig: () => Promise<MobilettoMetadata[]>;
+    info: () => MobilettoDriverInfo;
     stripPrefix: (name: string) => string;
     nameToObj: (name: string) => MobilettoMetadata;
     list(path: string | undefined, recursiveOrOpts: MobilettoListOptions | boolean, visitor?: MobilettoVisitor): Promise<MobilettoMetadata[] | undefined>;
