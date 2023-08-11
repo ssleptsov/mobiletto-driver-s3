@@ -1,6 +1,6 @@
 {
   "name": "mobiletto-driver-s3",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "type": "module",
   "description": "The Amazon S3 driver for mobiletto. This package is intended to be used with mobiletto-base, which does not include any drivers",
   "main": "./lib/cjs/index.js",
@@ -44,8 +44,8 @@
     "dotenv": "^16.3.1",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
-    "mobiletto-base": "^2.0.33",
-    "mobiletto-driver-local": "^2.0.10",
+    "mobiletto-base": "^2.0.34",
+    "mobiletto-driver-local": "^2.0.11",
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "tslint-config-prettier": "^1.18.0",
