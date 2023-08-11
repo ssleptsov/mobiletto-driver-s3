@@ -1,11 +1,15 @@
-import { MobilettoError, MobilettoNotFoundError, MobilettoOptions, MobilettoVisitor, MobilettoMetadata, MobilettoWriteSource, MobilettoListOptions, MobilettoRemoveOptions, MobilettoDriverInfo } from "mobiletto-base";
+import { MobilettoError, MobilettoNotFoundError, MobilettoOptions, MobilettoVisitor, MobilettoMetadata, MobilettoWriteSource, MobilettoListOptions, MobilettoRemoveOptions, MobilettoDriverInfo, MobilettoDriverScope } from "mobiletto-base";
 export type S3Options = MobilettoOptions & {
     bucket?: string;
     prefix?: string;
     delimiter?: string;
     region?: string;
 };
-export declare const S3Info: MobilettoDriverInfo;
+export type S3InfoType = {
+    driver: string;
+    scope: MobilettoDriverScope;
+};
+export declare const S3Info: S3InfoType;
 declare class StorageClient {
     private client;
     private region;
