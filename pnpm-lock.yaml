@@ -41,11 +41,11 @@ devDependencies:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.44.0)
   mobiletto-base:
-    specifier: ^2.0.35
-    version: 2.0.35
+    specifier: ^2.1.0
+    version: 2.1.0
   mobiletto-driver-local:
-    specifier: ^2.0.12
-    version: 2.0.12
+    specifier: ^2.0.13
+    version: 2.0.13
   mocha:
     specifier: ^10.2.0
     version: 10.2.0
@@ -2200,13 +2200,13 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /mobiletto-base@2.0.35:
-    resolution: {integrity: sha512-0RyguZoJ0muziQJ6fjdQHf82gSpeegdiP6Bk73jUjPP0+DZVdooyn3yiFc+cQSyHlzBwyPeHYXuGb2b/klRvbg==}
+  /mobiletto-base@2.1.0:
+    resolution: {integrity: sha512-/HT4jyFsz0rTPnnMkFmEBwivHIfV5i/X1zY4yd8N80Jln14pU4iEjLwCoeTaefxzkOBUcDLft4Xo/CSMsJpjRw==}
     dependencies:
       bullmq: 4.7.2
       ioredis: 5.3.2
       lru-cache: 10.0.1
-      mobiletto-common: 2.1.0
+      mobiletto-common: 2.1.2
       node-fetch-commonjs: 3.3.1
       node-redis-scan: 1.3.6
       shasum: 1.0.2
@@ -2214,14 +2214,14 @@ packages:
       - supports-color
     dev: true
 
-  /mobiletto-common@2.1.0:
-    resolution: {integrity: sha512-afzx6l/SoZaMjgLeb13DV2L8hXoqvg7qrw/lFHlvLhEOanboacJABgfX6TYB2Z1LmOcqUijVt28wQyQ7YQ+7TQ==}
+  /mobiletto-common@2.1.2:
+    resolution: {integrity: sha512-Umv+Ab47fLa0LRDyH40npyQuGGowEbD5146AtMTmJ9f/0PyRUp5KU7F7Ql9EwK7+ZXclg4+pxtK5VnDTfF9NUA==}
     dependencies:
       consola: 3.2.3
     dev: true
 
-  /mobiletto-driver-local@2.0.12:
-    resolution: {integrity: sha512-O1h6GvaQYdkodafZyIVzmx4KpKHi8cCxCG6SXm7lQezQJ/l6xG3Jhsmx/lAI46BoKS2gX7lcRH7yKvRCrZpnKA==}
+  /mobiletto-driver-local@2.0.13:
+    resolution: {integrity: sha512-m6zyXFOJIUJ+VuJb27D48wqhbyFphpKeP2ZL5JYCr5EdhNiR7QXaG8/izOBr6i6AYwV8XcMgUs9g3a9luDxk+g==}
     dev: true
 
   /mocha@10.2.0:
