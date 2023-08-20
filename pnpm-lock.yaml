@@ -44,8 +44,8 @@ devDependencies:
     specifier: ^2.1.1
     version: 2.1.1
   mobiletto-driver-local:
-    specifier: ^2.0.14
-    version: 2.0.14
+    specifier: ^2.0.15
+    version: 2.0.15
   mocha:
     specifier: ^10.2.0
     version: 10.2.0
@@ -1485,16 +1485,17 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /bullmq@4.7.2:
-    resolution: {integrity: sha512-cAK1Xlj8HkD18zTPHKlALrQj6JwnUqxXRW94uXr4YjYBdooYMaB31aGcnEq7h4nLq50si1eW0YRcgswYlK7vaw==}
+  /bullmq@4.7.4:
+    resolution: {integrity: sha512-O5KQbkO29y0NxVVh10RHsLG2LGFic9Izw02yGIuoJLcTDgV9KDzVHhT0bzaqohIpq8YflwcXjokLldloycddSA==}
     dependencies:
       cron-parser: 4.9.0
       glob: 8.1.0
       ioredis: 5.3.2
       lodash: 4.17.21
       msgpackr: 1.9.7
+      node-abort-controller: 3.1.1
       semver: 7.5.4
-      tslib: 2.6.1
+      tslib: 2.6.2
       uuid: 9.0.0
     transitivePeerDependencies:
       - supports-color
@@ -2203,7 +2204,7 @@ packages:
   /mobiletto-base@2.1.1:
     resolution: {integrity: sha512-Q0mjSRfULuP1edMAJD/BWXQEj4LcIouXhA6cbASaHAxYS87M8VluJM/7peTnz+4cSxELXApRnR7oM8J+eT8voA==}
     dependencies:
-      bullmq: 4.7.2
+      bullmq: 4.7.4
       ioredis: 5.3.2
       lru-cache: 10.0.1
       mobiletto-common: 2.1.2
@@ -2220,8 +2221,8 @@ packages:
       consola: 3.2.3
     dev: true
 
-  /mobiletto-driver-local@2.0.14:
-    resolution: {integrity: sha512-VDXyY0nMy2Xb03l5bzcdlIQjBqHvkPpACV1l18Ip9Li9NP8bT9RSXP1IZyrYkxcPDBv8LmzFNCKwiiNKx9b0IQ==}
+  /mobiletto-driver-local@2.0.15:
+    resolution: {integrity: sha512-cpJJj410M9hmGQMLVdMAH2IsTyKxzw2xfuO9xNYu/zPzRl61x85HroAOsyW3QmAVuZxmeH85GGueBubDXisyfw==}
     dev: true
 
   /mocha@10.2.0:
@@ -2294,6 +2295,10 @@ packages:
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+    dev: true
+
+  /node-abort-controller@3.1.1:
+    resolution: {integrity: sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ==}
     dev: true
 
   /node-domexception@1.0.0:
@@ -2598,8 +2603,8 @@ packages:
     resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
     dev: false
 
-  /tslib@2.6.1:
-    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
   /tslint-config-prettier@1.18.0:
