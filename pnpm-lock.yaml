@@ -41,11 +41,11 @@ devDependencies:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.44.0)
   mobiletto-base:
-    specifier: ^2.1.3
-    version: 2.1.3
+    specifier: ^2.1.7
+    version: 2.1.7
   mobiletto-driver-local:
-    specifier: ^2.0.17
-    version: 2.0.17
+    specifier: ^2.0.18
+    version: 2.0.18
   mocha:
     specifier: ^10.2.0
     version: 10.2.0
@@ -1485,14 +1485,14 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /bullmq@4.11.4:
-    resolution: {integrity: sha512-LuCR3ILngYa3CLC5jyf8DU4Yokj9T12MWwBogP3S4IiJUtbJsQ9GTGFxho3imRxXfcd9DUfrABT/pSoqVigXiQ==}
+  /bullmq@4.17.0:
+    resolution: {integrity: sha512-URnHgB01rlCP8RTpmW3kFnvv3vdd2aI1OcBMYQwnqODxGiJUlz9MibDVXE83mq7ee1eS1IvD9lMQqGszX6E5Pw==}
     dependencies:
       cron-parser: 4.9.0
       glob: 8.1.0
       ioredis: 5.3.2
       lodash: 4.17.21
-      msgpackr: 1.9.9
+      msgpackr: 1.10.1
       node-abort-controller: 3.1.1
       semver: 7.5.4
       tslib: 2.6.2
@@ -1588,7 +1588,7 @@ packages:
     resolution: {integrity: sha512-p0SaNjrHOnQeR8/VnfGbmg9te2kfyYSQ7Sc/j/6DtPL3JQvKxmjO9TSjNFpujqV3vEYYBvNNvXSxzyksBWAx1Q==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      luxon: 3.4.3
+      luxon: 3.4.4
     dev: true
 
   /cross-spawn@7.0.3:
@@ -2081,16 +2081,6 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
 
-  /json-stable-stringify@0.0.1:
-    resolution: {integrity: sha512-nKtD/Qxm7tWdZqJoldEC7fF0S41v0mWbeaXG3637stOWfyGxTgWTYE2wtfKmjzpvxv2MA2xzxsXOIiwUpkX6Qw==}
-    dependencies:
-      jsonify: 0.0.1
-    dev: true
-
-  /jsonify@0.0.1:
-    resolution: {integrity: sha512-2/Ki0GcmuqSrgFyelQq9M05y7PS0mEwuIzrf3f1fPqkVDVRvZrPZtVSMHxdgo8Aq0sxAOb/cr2aqqA3LeWHVPg==}
-    dev: true
-
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
@@ -2136,8 +2126,8 @@ packages:
       get-func-name: 2.0.0
     dev: true
 
-  /lru-cache@10.0.1:
-    resolution: {integrity: sha512-IJ4uwUTi2qCccrioU6g9g/5rvvVl13bsdczUUcqbciD9iLr095yj8DQKdObriEvuNSx325N1rV1O0sJFszx75g==}
+  /lru-cache@10.2.0:
+    resolution: {integrity: sha512-2bIM8x+VAf6JT4bKAljS1qUWgMsqZRPGJS6FSahIMPVvctcNhyVp7AJu7quxOW9jwkryBReKZY5tY5JYv2n/7Q==}
     engines: {node: 14 || >=16.14}
     dev: true
 
@@ -2148,8 +2138,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /luxon@3.4.3:
-    resolution: {integrity: sha512-tFWBiv3h7z+T/tDaoxA8rqTxy1CHV6gHS//QdaH4pulbq/JuBSGgQspQQqcgnwdAx6pNI7cmvz5Sv/addzHmUg==}
+  /luxon@3.4.4:
+    resolution: {integrity: sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==}
     engines: {node: '>=12'}
     dev: true
 
@@ -2186,28 +2176,28 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /mobiletto-base@2.1.3:
-    resolution: {integrity: sha512-LBsfnOngIa3ZO4IWrCSHqtVJGa4MOdMp0qBCsZsa2QrAWIg12yPAGbVS4JCHZfM7Xi3IM9+sMABOh7OnkpuE6g==}
+  /mobiletto-base@2.1.7:
+    resolution: {integrity: sha512-p/i8ulXeHM25jRGJOdomrU3im7BSsboCjlWsker5bS+I7aldCzIrDrkIWqbRhYwpbtn6yIN3IC7Db+Ev+92DFg==}
     dependencies:
-      bullmq: 4.11.4
+      bullmq: 4.17.0
       ioredis: 5.3.2
-      lru-cache: 10.0.1
-      mobiletto-common: 2.1.5
+      lru-cache: 10.2.0
+      mobiletto-common: 2.1.6
       node-fetch-commonjs: 3.3.2
-      node-redis-scan: 1.3.6
-      shasum: 1.0.2
+      node-redis-scan: 1.3.7
+      zilla-util: 1.0.50
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /mobiletto-common@2.1.5:
-    resolution: {integrity: sha512-qUOP0bTJud8KsyXRR+2Hy2tAYXZ8onlKxFpdYCry/QZcp+pJjkClj4tVAMnZsWXTTS0hYtFrFUO8Ae8UU3jYOw==}
+  /mobiletto-common@2.1.6:
+    resolution: {integrity: sha512-ypdzGUpL/gtT6/7ctS3S1rC9WrN3wC7GZeK62vIwcu3sOxbeAaUp6OpNy7PrgtCMseUU0zj3Mdwy9uq/SFdKqg==}
     dependencies:
       consola: 3.2.3
     dev: true
 
-  /mobiletto-driver-local@2.0.17:
-    resolution: {integrity: sha512-bR+mE6U3YB5ow2/pPkAKAlWncMuXbVQ/M+Dp5RZeHQtBm2xfOFzuUbzBoJcGNa7V7WDiJpr8P90uxzExHtKUCg==}
+  /mobiletto-driver-local@2.0.18:
+    resolution: {integrity: sha512-UXQtH113/nHxUUNyc4kHQZNspgkcjJgzdC24VxF0vvU58CZ7aCzObzLKZBaWQkHizaVYr57BQuN4gx61NBzb0g==}
     dev: true
 
   /mocha@10.2.0:
@@ -2262,8 +2252,8 @@ packages:
     dev: true
     optional: true
 
-  /msgpackr@1.9.9:
-    resolution: {integrity: sha512-sbn6mioS2w0lq1O6PpGtsv6Gy8roWM+o3o4Sqjd6DudrL/nOugY+KyJUimoWzHnf9OkO0T6broHFnYE/R05t9A==}
+  /msgpackr@1.10.1:
+    resolution: {integrity: sha512-r5VRLv9qouXuLiIBrLpl2d5ZvPt8svdQTl5/vMvE4nzDMyEX4sgW5yWhuBBj5UmgwOTWj8CIdSXn5sAfsHAWIQ==}
     optionalDependencies:
       msgpackr-extract: 3.0.2
     dev: true
@@ -2296,17 +2286,18 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       node-domexception: 1.0.0
-      web-streams-polyfill: 3.2.1
+      web-streams-polyfill: 3.3.2
     dev: true
 
   /node-gyp-build-optional-packages@5.0.7:
     resolution: {integrity: sha512-YlCCc6Wffkx0kHkmam79GKvDQ6x+QZkMjFGrIMxgFNILFvGSbCp2fCBC55pGTT9gVaz8Na5CLmxt/urtzRv36w==}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 
-  /node-redis-scan@1.3.6:
-    resolution: {integrity: sha512-Odg11erqUMCtCB+i3CRcXCutud1ir4cD2815TTC67q4mjT6nQJWxIK83YnYjulKLxtOsRjA+fFH80UFFG5bywA==}
+  /node-redis-scan@1.3.7:
+    resolution: {integrity: sha512-f6kK0/zVN5JPI3G4pChWKRnv0SB9thB7o5wG733mzu7mFU34HUO5olBHDQ0QWxwiSsb8/OSfEyULIIms1SWXig==}
     engines: {node: '>= 10.12.0'}
     dev: true
 
@@ -2482,21 +2473,6 @@ packages:
       randombytes: 2.1.0
     dev: true
 
-  /sha.js@2.4.11:
-    resolution: {integrity: sha512-QMEp5B7cftE7APOjk5Y6xgrbWu+WkLVQwk8JNjZ8nKRciZaByEW6MubieAiToS7+dwvrjGhH8jRXz3MVd0AYqQ==}
-    hasBin: true
-    dependencies:
-      inherits: 2.0.4
-      safe-buffer: 5.2.1
-    dev: true
-
-  /shasum@1.0.2:
-    resolution: {integrity: sha512-UTzHm/+AzKfO9RgPgRpDIuMSNie1ubXRaljjlhFMNGYoG7z+rm9AHLPMf70R7887xboDH9Q+5YQbWKObFHEAtw==}
-    dependencies:
-      json-stable-stringify: 0.0.1
-      sha.js: 2.4.11
-    dev: true
-
   /shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
     engines: {node: '>=8'}
@@ -2651,8 +2627,8 @@ packages:
     hasBin: true
     dev: true
 
-  /web-streams-polyfill@3.2.1:
-    resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
+  /web-streams-polyfill@3.3.2:
+    resolution: {integrity: sha512-3pRGuxRF5gpuZc0W+EpwQRmCD7gRqcDOMt688KmdlDAgAyaB1XlN0zq2njfDNm44XVdIouE7pZ6GzbdyH47uIQ==}
     engines: {node: '>= 8'}
     dev: true
 
@@ -2721,4 +2697,8 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: true
+
+  /zilla-util@1.0.50:
+    resolution: {integrity: sha512-Xt/YRWZBdeR9gZ0MoXAK420p4UYHKEQ0FfzWA9xFuPuPyKSM1N4QAlI1W0aApBaUt0S6QveX54m27YlKX9ePaw==}
     dev: true
