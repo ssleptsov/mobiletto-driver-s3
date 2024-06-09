@@ -13,22 +13,27 @@ import {
     MobilettoRemoveOptions,
     MobilettoDriverInfo,
     MobilettoDriverScope,
+    MobilettoListOutput,
+    MobilettoListPaging,
 } from "mobiletto-base";
 
 import { dirname } from "path";
 
 import {
     S3Client,
-    ListObjectsCommand,
+    ListObjectsV2Command,
     ListObjectsRequest,
     HeadObjectCommand,
     GetObjectCommand,
     DeleteObjectCommand,
     DeleteObjectsCommand,
     NoSuchKey,
-    ListObjectsCommandOutput,
+    ListObjectsV2CommandOutput,
     CompleteMultipartUploadCommandOutput,
     DeleteObjectsRequest,
+    ListObjectsV2CommandInput,
+    ListObjectsCommandOutput,
+    ListObjectsCommand,
 } from "@aws-sdk/client-s3";
 
 import { Readable } from "stream";
@@ -58,6 +63,13 @@ export const S3Info: S3InfoType = {
     scope: "global",
 };
 
+/**
+ * For extend internal Aws request for delete and etc.
+ */
+type ListAdditionalParams = Partial<{
+    MaxKeys: number;
+}>;
+
 class StorageClient {
     private client: S3Client;
     private region: string;
@@ -85,7 +97,7 @@ class StorageClient {
     }
 
     // noinspection JSUnusedGlobalSymbols -- called by driver init
-    testConfig = async () => await this._list("", false, undefined, { MaxKeys: 1 });
+    testConfig = async () => await this._list("", false, undefined, undefined, { maxItems: 1});
 
     info = (): MobilettoDriverInfo => ({
         canonicalName: () => `s3:${this.bucket}`,
@@ -103,24 +115,40 @@ class StorageClient {
     };
 
     async list(path = "", recursiveOrOpts: MobilettoListOptions | boolean, visitor?: MobilettoVisitor) {
-        const recursive =
-            recursiveOrOpts === true || (typeof recursiveOrOpts === "object" && recursiveOrOpts.recursive);
+        let recursive = false;
+        let params: ListAdditionalParams = {};
+        let paging: MobilettoListPaging | undefined;
+        if (typeof recursiveOrOpts === "object") {
+            recursive = recursiveOrOpts.recursive ?? recursive;
+            if (typeof recursiveOrOpts.paging === "object") {
+                paging = recursiveOrOpts.paging;
+            }
+        } else if (typeof recursiveOrOpts === "boolean") {
+            recursive = recursiveOrOpts;
+        }
+
         try {
-            return await this._list(path, recursive, visitor);
+            return await this._list(path, recursive, visitor, params, paging);
         } catch (e) {
             if (e instanceof MobilettoNotFoundError && !recursive && path.includes(this.delimiter)) {
                 // are we trying to list a single file?
-                const objects = await this._list(dirname(path), false);
-                const found = objects.find((o) => o.name === path);
+                const output = await this._list(dirname(path), false);
+                const found = output.objects.find((o) => o.name === path);
                 if (found) {
-                    return [found];
+                    return { objects: [found] };
                 }
                 throw e;
             }
         }
     }
 
-    async _list(path: string, recursive = false, visitor?: MobilettoVisitor, params = {}) {
+    async _list(
+        path: string,
+        recursive = false,
+        visitor?: MobilettoVisitor,
+        params: ListAdditionalParams = {},
+        paging?: MobilettoListPaging
+    ): Promise<MobilettoListOutput> {
         const logPrefix = `_list(path=${path})`;
 
         // Declare truncated as a flag that the while loop is based on.
@@ -130,22 +158,34 @@ class StorageClient {
             this.prefix +
             (path.startsWith(this.delimiter) ? path.substring(0) : path) +
             (path.length === 0 || path.endsWith(this.delimiter) ? "" : this.delimiter);
-        const bucketParams: ListObjectsRequest = Object.assign({}, params, {
-            Region: this.region,
+
+        const bucketParams: ListObjectsV2CommandInput = {
+            ...params,
             Bucket: this.bucket,
             Prefix,
-        });
+        };
         if (!recursive) {
             bucketParams.Delimiter = this.delimiter;
         }
-        const objects = [];
+        const output: MobilettoListOutput = { objects: [] };
+
+        let { continuationToken } = paging ?? {};
         let objectCount = 0;
+
         logger.debug(`${logPrefix} bucketParams=${JSON.stringify(bucketParams)}`);
 
+        let MaxKeys = paging?.maxItems ? paging.maxItems : params.MaxKeys;
         // while loop that runs until 'response.truncated' is false.
+
         while (truncated) {
             try {
-                const response: ListObjectsCommandOutput = await this.client.send(new ListObjectsCommand(bucketParams));
+                const response: ListObjectsV2CommandOutput = await this.client.send(
+                    new ListObjectsV2Command({
+                        ...bucketParams,
+                        ContinuationToken: continuationToken,
+                        MaxKeys,
+                    })
+                );
                 const hasContents = typeof response.Contents !== "undefined";
                 if (hasContents) {
                     for (const item of response.Contents || []) {
@@ -154,7 +194,7 @@ class StorageClient {
                         if (visitor) {
                             await visitor(obj);
                         }
-                        objects.push(obj);
+                        output.objects.push(obj);
                         objectCount++;
                     }
                 }
@@ -166,14 +206,23 @@ class StorageClient {
                         if (visitor) {
                             await visitor(obj);
                         }
-                        objects.push(obj);
+                        output.objects.push(obj);
                         objectCount++;
                     }
                 }
                 truncated = response.IsTruncated || false;
+
+                 // we have paging
+                 if (paging && objectCount === paging.maxItems) {
+                    // we are done
+                    output.nextPageToken = response.NextContinuationToken;
+                    output.previousPageToken = paging?.continuationToken;
+                    break;
+                }
+
                 // If truncated is true, advance the marker
                 if (truncated) {
-                    bucketParams.Marker = response.NextMarker;
+                    continuationToken = response.NextContinuationToken;
                 } else if (!hasContents && !hasCommonPrefixes) {
                     if (path === "") {
                         break;
@@ -190,8 +239,9 @@ class StorageClient {
         if (recursive && objectCount === 0 && path !== "") {
             throw new MobilettoNotFoundError(path);
         }
-        const filtered = objects.filter((o) => o.name !== path);
-        return filtered;
+        output.objects = output.objects.filter((o) => o.name !== path);
+
+        return output;
     }
 
     normalizeKey = (path: string) => {
@@ -286,9 +336,11 @@ class StorageClient {
         const recursive = optsOrRecursive === true || (optsOrRecursive && optsOrRecursive.recursive);
         if (recursive) {
             const removed = [];
-            let objects: MobilettoMetadata[] | null = await this._list(path, true, undefined, {
-                MaxKeys: DELETE_OBJECTS_MAX_KEYS,
-            });
+            let objects: MobilettoMetadata[] | null = (
+                await this._list(path, true, undefined, {
+                    MaxKeys: DELETE_OBJECTS_MAX_KEYS,
+                })
+            ).objects;
             while (objects && objects.length > 0) {
                 const Delete = {
                     Objects: objects.map((obj) => {
@@ -320,7 +372,7 @@ class StorageClient {
                     );
                 }
                 try {
-                    objects = await this._list(path, true, undefined, { MaxKeys: DELETE_OBJECTS_MAX_KEYS });
+                    objects = (await this._list(path, true, undefined, { MaxKeys: DELETE_OBJECTS_MAX_KEYS })).objects;
                 } catch (e) {
                     if (!(e instanceof MobilettoNotFoundError)) {
                         throw e instanceof MobilettoError

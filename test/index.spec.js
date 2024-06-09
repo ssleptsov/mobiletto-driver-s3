@@ -95,7 +95,7 @@ async function writeRandomFile(fixture, size) {
 }
 
 const encryptionTests = () => [null, { key: rand(32) }];
-// const encryptionTests = () => [null];
+// const encryptionTests = () => [];
 // const encryptionTests = () => [{ key: rand(32) }];
 
 const REDIS_ENABLED = {
@@ -169,7 +169,8 @@ for (const redisSetup of redisTests()) {
             describe(`${driverTest} - listing with no arguments returns appropriate results`, () => {
                 it("should return appropriate results from a default listing", async () => {
                     const api = await mobiletto(driverName, config.key, config.secret, config.opts);
-                    const results = await api.list();
+                    const output = await api.list();
+                    const { objects: results } = output;
                     if (expectBlankVolume && (firstTestRun || !anyWrites)) {
                         firstTestRun = false;
                         expect(results.length).eq(0, "expected no results in the default listing");
@@ -177,6 +178,10 @@ for (const redisSetup of redisTests()) {
                         expect(results.length).gt(0, "expected some results in the default listing");
                     }
                 });
+                
+
+              
+
                 it("should throw MobilettoNotFound when reading metadata for a file that does not exist", async () => {
                     const api = await mobiletto(driverName, config.key, config.secret, config.opts);
                     try {
@@ -190,6 +195,62 @@ for (const redisSetup of redisTests()) {
                         expect(e).instanceof(MobilettoNotFoundError);
                     }
                 });
+            });
+
+            describe(`${driverTest} - listing with paging`, () => {
+                let tempFiles = [];
+                const fileCount = 10;
+                const pagingPath = 'paging';
+                const recurcivePath = `${pagingPath}_with_dirs`;
+                before(`Insert ${fileCount} files to root for paging`, async () => {
+                    const api = await mobiletto(driverName, config.key, config.secret, config.opts);
+                    for (let i = 0; i < fileCount; i++) {
+                        const filename = `${pagingPath}/${i}_${rand(12)}`
+                        await api.write(filename, rand(10));
+                        tempFiles.push(filename);
+                    }
+
+                    for (let i = 0; i < fileCount; i++) {
+                        const filename = `${recurcivePath}/${rand(3)}/${i}_${rand(12)}`
+                        await api.write(filename, rand(10));
+                        tempFiles.push(filename);
+                    }
+                });
+
+                after(async () => {
+                    const api = await mobiletto(driverName, config.key, config.secret, config.opts);
+                    await Promise.all(tempFiles.map(name => api.remove(name)))
+                })
+
+                it("should return results with paged folder", async () => {
+                    const api = await mobiletto(driverName, config.key, config.secret, config.opts);
+                    const output = await api.list(pagingPath, { paging: { maxItems: 3 } });
+                    expect(output.objects.length).eq(3, "expected page with 3 objects");
+                    expect(output.nextPageToken, "expect next page token").to.be.not.undefined;
+
+                    const secondOutputPage = await api.list(pagingPath, { paging: { maxItems: 3, continuationToken: output.nextPageToken } });
+
+                    expect(secondOutputPage.objects.length).eq(3, "expected second page with 3 objects");
+                    expect(secondOutputPage.nextPageToken).to.be.not.undefined;
+
+                    expect(secondOutputPage.previousPageToken).eq(output.nextPageToken, "previous page token must be equal to first requested")
+
+                    const lastAndOverflowPage = await api.list(pagingPath, { paging: { maxItems: 30, continuationToken: secondOutputPage.nextPageToken } });
+
+
+                    expect(lastAndOverflowPage.objects.length).eq(4, "expected second page equal 4 objects as all objects");
+                    expect(lastAndOverflowPage.nextPageToken, "expect next page for last page be undefined").to.be.undefined;
+
+                });
+
+                it("should return results for paging with recurcive", async () => {
+                    const api = await mobiletto(driverName, config.key, config.secret, config.opts);
+                    const output = await api.list(recurcivePath, { recursive: true, paging: { maxItems: 999999 } });
+                    expect(output.objects.length).eq(10, "expected page with 10 objects");
+                    expect(output.nextPageToken, "expect next page token").to.be.undefined;
+
+                });
+
             });
 
             describe(`${driverTest} - write a file, read file, read metadata, delete file`, () => {
@@ -386,12 +447,13 @@ for (const redisSetup of redisTests()) {
                         }
                     });
                     it("should successfully list a file individually", async () => {
-                        const singleFile = await fixture.api.list(fixture.name);
+                        const output = await fixture.api.list(fixture.name);
+                        const { objects: singleFile } = output;
                         expect(singleFile).to.have.lengthOf(1);
                         expect(singleFile[0]).to.have.property("name", fixture.name);
                     });
                     it("should successfully list files in the base directory", async () => {
-                        const baseListing = await fixture.api.list("", { recursive: true });
+                        const { objects: baseListing } = await fixture.api.list("", { recursive: true });
                         expect(baseListing).to.have.lengthOf.greaterThanOrEqual(1);
                         expect(
                             baseListing.find(
@@ -400,9 +462,9 @@ for (const redisSetup of redisTests()) {
                         ).to.not.be.null;
                     });
                     it("should successfully list files in a subdirectory, with or without a trailing slash", async () => {
-                        const noSlash = await fixture.api.list(randomParent);
+                        const { objects: noSlash } = await fixture.api.list(randomParent);
                         expect(noSlash).to.have.lengthOf.greaterThanOrEqual(1);
-                        const withSlash = await fixture.api.list(randomParent + "/");
+                        const { objects: withSlash } = await fixture.api.list(randomParent + "/");
                         expect(withSlash).to.have.lengthOf.greaterThanOrEqual(1);
                         for (const f of noSlash) {
                             expect(withSlash.find((o) => o.name === f.name)).to.not.be.null;
@@ -413,7 +475,7 @@ for (const redisSetup of redisTests()) {
                     });
 
                     it("should successfully recursively list files and see all correct subdirectories and files", async () => {
-                        const allFiles = await fixture.api.list(randomParent, { recursive: true });
+                        const { objects: allFiles } = await fixture.api.list(randomParent, { recursive: true });
                         expect(allFiles).to.have.lengthOf.greaterThanOrEqual(fileCount);
                         // Not all drivers return "dir" entries when recursively listing. We should see all the files though
                         // expect(allFiles.find(f => f.name === fullSubdirPath && f.type === M_DIR)).to.not.be.null
@@ -427,12 +489,12 @@ for (const redisSetup of redisTests()) {
                         await assertMeta(fixture.api, fixture.name, READ_SZ);
                     });
                     it("should see correct types on objects returned from a listing of the new directory", async () => {
-                        const objects = await fixture.api.list(randomParent);
+                        const { objects } = await fixture.api.list(randomParent);
                         expect(objects).to.have.lengthOf(1);
                         expect(objects[0]).to.have.property("type", M_DIR, `subdir should have type ${M_DIR}`);
                     });
                     it("should see correct types on objects returned from a listing of the subdirectory", async () => {
-                        const objects = await fixture.api.list(`${randomParent}/${subdirName}/`);
+                        const { objects } = await fixture.api.list(`${randomParent}/${subdirName}/`);
                         expect(objects).to.have.lengthOf(fileCount);
                         for (let i = 0; i < fileCount; i++) {
                             // we should find all the files, and they should all have the correct type
@@ -448,9 +510,9 @@ for (const redisSetup of redisTests()) {
                             .greaterThan(0, "expected some successes in mirroring");
                     });
                     it("should see the same files mirrored both places", async () => {
-                        const originalThings = await fixture.api.list(fullSubdirPath, { recursive: true });
+                        const { objects: originalThings } = await fixture.api.list(fullSubdirPath, { recursive: true });
                         const mirrorPath = `${mirrorDest}${subdirName}`;
-                        const mirrorThings = await fixture.mirrorApi.list(mirrorPath, { recursive: true });
+                        const { objects: mirrorThings } = await fixture.mirrorApi.list(mirrorPath, { recursive: true });
                         expect(originalThings.length === mirrorThings.length).to.be.true;
 
                         const originalFiles = originalThings.filter((o) => o.type === M_FILE);
